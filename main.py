@@ -1,12 +1,48 @@
+import os
 import threading
 import speech_recognition as sr
 import cv2
 
-# This function listens for user input.
+r = sr.Recognizer()
+m = sr.Microphone()
+
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+cap = cv2.VideoCapture(0)
+
+
+# photographs user
+def photograph():
+    print("*SNAP* Implement me!")
+
+# terminates program
+def terminate():
+    print("Exiting... Goodbye!")
+    os._exit(0)
+
+# handles speech input
+def handle(input):
+    match input:
+        # terminate
+        case "exit":
+            terminate()
+        case "quit":
+            terminate()
+        case "leave":
+            terminate()
+        case "close":
+            terminate()
+        case "clothes":
+            terminate()
+        
+        # photograph
+        case "cheese":
+            photograph()
+        case "snap":
+            photograph()
+
+# listens for user input
 # https://github.com/Uberi/speech_recognition/blob/master/speech_recognition/__main__.py
 def listen():
-    r = sr.Recognizer()
-    m = sr.Microphone()
     try:
         print("Please remain quiet as the program adjusts ambiance levels.")
         with m as source: r.adjust_for_ambient_noise(source)
@@ -17,6 +53,7 @@ def listen():
             try:
                 value = r.recognize_google(audio)
                 print("What we think you said:\n{}".format(value))
+                handle(value)
             except sr.UnknownValueError:
                 print("What you said was unintelligable")
             except sr.RequestError as e:
@@ -25,11 +62,9 @@ def listen():
         print("\nGoodbye.")
         pass
 
-# This function detects faces through webcam.
+# detects faces through webcam
 # https://github.com/adarsh1021/facedetection
 def look():
-    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-    cap = cv2.VideoCapture(0)
     while True:
         _, img = cap.read()
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -41,3 +76,14 @@ def look():
         if k==27:
             break
     cap.release()
+    terminate()
+
+# multithread looking and listening
+if __name__ == "__main__":
+    t1 = threading.Thread(target=listen)
+    t2 = threading.Thread(target=look)
+    
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
