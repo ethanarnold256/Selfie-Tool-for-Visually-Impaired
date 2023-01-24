@@ -1,14 +1,33 @@
+# dependencies:
+# pip install opencv-python
+#             pyside6
+#             pyaudio
+#             SpeechRecognition
+
 import os
 import threading
 import speech_recognition as sr
 import cv2
+#from PySide6 import QtCore, QtWidgets, QtGui
+
+#    _                          _           
+#   | |                        | |          
+#   | |__   ___ _   _      __ _| | _____  __
+#   | '_ \ / _ \ | | |    / _` | |/ _ \ \/ /
+#   | | | |  __/ |_| |   | (_| | |  __/>  < 
+#   |_| |_|\___|\__, |    \__,_|_|\___/_/\_\ ...
+#                __/ |                      
+#               |___/                       
+#
+# please put QT class/code here
+
+# declarations
+# these are put up here because some functions (below) use them
 
 r = sr.Recognizer()
 m = sr.Microphone()
-
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
-
 
 # photographs user
 def photograph():
@@ -29,9 +48,11 @@ def handle(input):
             terminate()
         case "leave":
             terminate()
+        case "leaf": # near homophone; may save some people
+            terminate()
         case "close":
             terminate()
-        case "clothes":
+        case "clothes": # near homophone; may save some people
             terminate()
         
         # photograph
@@ -52,7 +73,7 @@ def listen():
             print("Please wait while we process what was said.")
             try:
                 value = r.recognize_google(audio)
-                print("What we think you said:\n{}".format(value))
+                print("What we think you said:\n\n\t{}\n".format(value))
                 handle(value)
             except sr.UnknownValueError:
                 print("What you said was unintelligable")
@@ -71,19 +92,19 @@ def look():
         faces = face_cascade.detectMultiScale(gray, 1.1, 4)
         for (x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
-        cv2.imshow('img', img)
+        # cv2.imshow('img', img) # (un)comment this to toggle OpenCV's video output
         k = cv2.waitKey(30) & 0xff
         if k==27:
             break
     cap.release()
     terminate()
 
-# multithread looking and listening
-if __name__ == "__main__":
-    t1 = threading.Thread(target=listen)
-    t2 = threading.Thread(target=look)
-    
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
+# main "function"
+
+# multithreading 'look' and 'listen'
+t1 = threading.Thread(target=listen)
+t2 = threading.Thread(target=look)
+t1.start()
+t2.start()
+t1.join()
+t2.join()
