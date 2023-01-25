@@ -88,13 +88,30 @@ def listen():
 def look():
     while True:
         _, img = cap.read()
+        CAMERA_WIDTH = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        CAMERA_HEIGHT = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.1, 4)
         for (x, y, w, h) in faces:
+
             x_center = x+(w/2)
             y_center = y+(h/2)
-            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
-        # cv2.imshow('img', img) # (un)comment this to toggle OpenCV's video output
+            
+            if x_center > CAMERA_WIDTH/2:
+                if y_center > CAMERA_HEIGHT/2:
+                    # TOP RIGHT
+                    cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+                else:
+                    # BOTTOM RIGHT
+                    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            else:
+                if y_center > CAMERA_HEIGHT/2:
+                    # TOP LEFT
+                    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), 2)
+                else:
+                    # BOTTOM LEFT
+                    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 255), 2)
+        cv2.imshow('img', img) # (un)comment this to toggle OpenCV's video output
         k = cv2.waitKey(30) & 0xff
         if k==27:
             break
