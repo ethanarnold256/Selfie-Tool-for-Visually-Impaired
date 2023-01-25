@@ -91,7 +91,9 @@ def look():
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.1, 4)
         for (x, y, w, h) in faces:
-            cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+            x_center = x+(w/2)
+            y_center = y+(h/2)
+            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
         # cv2.imshow('img', img) # (un)comment this to toggle OpenCV's video output
         k = cv2.waitKey(30) & 0xff
         if k==27:
