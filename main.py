@@ -10,7 +10,6 @@ import threading
 import speech_recognition as sr
 import cv2
 import pyttsx3
-#from PySide6 import QtCore, QtWidgets, QtGui
 
 # declarations
 # these are put up here because some functions (below) use them
