@@ -61,6 +61,22 @@ There was a larger gap in time, which most probably was caused by facial detecti
 \section{Potential Improvement}
 
 
+There were some glitches when there were multiple heads in the frame.
+This could be remedied by selecting one head as the main head.
+The parameters for selecting a head could be determined by the size of the head (closest human).
+
+
+We need to learn proper multithreading, because when the user's head switches quadrants, the video freezes until the Text-To-Speech ends.
+In order to fix this, check every frame if there is a Text-To-Speech thread running, and if not, run.
+
+
+Another issue is that the Speech Recognition runs while the program also speaks.
+This creates a problem if the Text-To-Speech phrase exists as a command.
+Luckily, for us, this was not the case, but if were, we would need to implement the aforementioned check in the previous paragraph.
+
+
+The GUI was default from the OpenCV, which could have been reimplemented with the QT framework to make a more robust UI.
+
 
 \bibliographystyle{alpha}
 \bibliography{sample}
