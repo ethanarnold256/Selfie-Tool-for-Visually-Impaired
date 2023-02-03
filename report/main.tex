@@ -34,8 +34,28 @@ The video frame is a two-dimensional grid of pixels, so one can take the half of
 Compounding this idea with both axes, you can then determine if the rectangle is in one of four quadrants.
 
 
+For Text-To-Speech, we used 'pyttsx3'. We specifically picked this library because it does not require network connection.
+This means there are less 'weak links' in the chain to rely on.
+The text-To-Speech is ran every time the quadrant changes.
+The change is detected by comparing the current frame's quadrant to the previous.
+This prevents the TTS from enabling every frame.
+This would especially be a problem, as we did not fully understand how to multithread. This will be later discussed in 'Potential Improvements.'
+
+For Speech Input, we multithreaded the speech input.
+Sometimes, the computer mistakes words for homophones and similar phonemes, so this was accounted for.
+The speech input thread loops until the program exits. It saves what was thought to be said as a string and sends the string off to be interpreted.
+There is a function with a match that matches the string to another function to do an action.
+Photographing, exiting, and telling the computer which coordinate are possible functions.
 
 \section{Usage Statistics}
+
+We did two tests on anonymous people and got timing results.
+For the first test, we had the subject start out of the frame and command the computer to look in the top left.
+The first person took 36 seconds, while the second 26 seconds.
+The second test, the user started in the bottom right quadrant and moves to the top left.
+For the second test, the first person took 26 seconds while the latter took 42 seconds.
+There was a larger gap in time, which most probably was caused by facial detection malfunctioning.
+
 \section{Similar Applications}
 \section{Potential Improvement}
 
