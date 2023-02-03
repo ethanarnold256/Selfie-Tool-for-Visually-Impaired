@@ -15,7 +15,7 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 
 \title{Selfie Tool for the Visually Impaired}
-\author{Ethan Arnold, Alexander Cohentest}
+\author{Ethan Arnold, Alexander Cohen}
 
 \begin{document}
 \maketitle
@@ -26,7 +26,7 @@ This project was pair-programmed, with us simultaneously using the computer.
 
 
 For the project, we decided to use OpenCV for facial recognition.
-We imported 'cv2' and opened the camera as a video feed.
+We imported `cv2' and opened the camera as a video feed.
 The facial detection returns a rectangle with a coordinate and dimensions.
 We determine the position of the rectangle by finding the center of it, which is the position plus half the dimension respective to the axes.
 The Quadrants of the page are determined by a range of values.
@@ -34,8 +34,8 @@ The video frame is a two-dimensional grid of pixels, so one can take the half of
 Compounding this idea with both axes, you can then determine if the rectangle is in one of four quadrants.
 
 
-For Text-To-Speech, we used 'pyttsx3'. We specifically picked this library because it does not require network connection.
-This means there are less 'weak links' in the chain to rely on.
+For Text-To-Speech, we used `pyttsx3'. We specifically picked this library because it does not require network connection.
+This means there are less `weak links' in the chain to rely on.
 The text-To-Speech is ran every time the quadrant changes.
 The change is detected by comparing the current frame's quadrant to the previous.
 This prevents the TTS from enabling every frame.
@@ -58,6 +58,12 @@ There was a larger gap in time, which most probably was caused by facial detecti
 
 
 \section{Similar Applications}
+A program such as ours could have many other practicle applications. 
+Unfortunatly, people who have impaired vision sometimes struggle to do tasks indepedently or even at all. 
+For example, goggles could be built with computer vision technolagy that would identify objects in the way of ones path.
+Effectively nullifying the need for walking sticks or help from others. 
+A similar application could give the visually impaired the ability to read and write.
+Tools such as these could give the visually impared much more independence. 
 \section{Potential Improvement}
 
 
@@ -79,6 +85,5 @@ The GUI was default from the OpenCV, which could have been reimplemented with th
 
 
 \bibliographystyle{alpha}
-\bibliography{sample}
 
 \end{document}
