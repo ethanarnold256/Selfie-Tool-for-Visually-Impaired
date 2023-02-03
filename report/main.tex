@@ -22,8 +22,21 @@
 
 
 \section{Development Process}
+This project was pair-programmed, with us simultaneously using the computer.
 
-\section{similar applications}
+
+For the project, we decided to use OpenCV for facial recognition.
+We imported 'cv2' and opened the camera as a video feed.
+The facial detection returns a rectangle with a coordinate and dimensions.
+We determine the position of the rectangle by finding the center of it, which is the position plus half the dimension respective to the axes.
+The Quadrants of the page are determined by a range of values.
+The video frame is a two-dimensional grid of pixels, so one can take the half of a dimension and use comparisons (greater than, less than) to determine if it is on the top/bottom or left/right side of the screen.
+Compounding this idea with both axes, you can then determine if the rectangle is in one of four quadrants.
+
+
+
+\section{Usage Statistics}
+\section{Similar Applications}
 \section{Potential Improvement}
 
 
